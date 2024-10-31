@@ -1,0 +1,27 @@
+name: reto1_donut_app_ulises_millan
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.5.1 <4.0.0'
+
+dependencies:
+  firebase_core: ^2.32.0
+  firebase_auth: ^4.16.0
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  cloud_firestore: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/icons/
+    - lib/images/

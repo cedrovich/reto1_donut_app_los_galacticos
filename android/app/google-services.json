@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "892458978538",
+    "project_id": "moviles8scgalacticos",
+    "storage_bucket": "moviles8scgalacticos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892458978538:android:7942e7b2614b0dea511b93",
+        "android_client_info": {
+          "package_name": "com.moviles8scgalacticos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkISz-j2oTPVgHikUwgOx5XYHz17XLvhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

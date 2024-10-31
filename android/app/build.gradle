@@ -1,0 +1,53 @@
+plugins {
+    id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services' // Asegúrate de que esta línea esté aquí
+    // END: FlutterFire Configuration
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.reto1_donut_app_ragde_escalante"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // Especifica tu propio ID de aplicación único
+        applicationId = "com.moviles8scgalacticos"
+        minSdk = 24 // Actualiza este valor según tus necesidades
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // Configura tu propio signing config para el build de release.
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+// Dependencias de Firebase
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.0.0') // Usa la BOM de Firebase para manejar versiones
+    implementation 'com.google.firebase:firebase-auth' // Dependencia para autenticación
+}
+
+// Aplica el plugin de Google Services al final del archivo
+apply plugin: 'com.google.gms.google-services'
