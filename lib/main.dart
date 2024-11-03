@@ -25,7 +25,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const LoginPage(), // Cambiado para que inicie en la página de inicio de sesión
+      home:
+          const LoginPage(), // Cambiado para que inicie en la página de inicio de sesión
       theme: ThemeData(
         tabBarTheme: const TabBarTheme(
           indicatorColor: Colors.pink,
@@ -34,4 +35,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-

@@ -9,12 +9,12 @@ class BurgerTile extends StatefulWidget {
   final String imageName;
 
   const BurgerTile({
-    Key? key,
+    super.key,
     required this.burgerName,
     required this.burgerPrice,
     required this.burgerColor,
     required this.imageName,
-  }) : super(key: key);
+  });
 
   @override
   _BurgerTileState createState() => _BurgerTileState();

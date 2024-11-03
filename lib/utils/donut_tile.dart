@@ -4,17 +4,18 @@ import '../utils/cart.dart';
 
 class DonutTile extends StatefulWidget {
   final String donutFlavor;
-  final String donutPrice;
-  final dynamic donutColor;
+  final String
+      donutPrice; // Cambiado a String para ser consistente con BurgerTile
+  final Color donutColor;
   final String imageName;
 
   const DonutTile({
-    Key? key,
+    super.key,
     required this.donutFlavor,
     required this.donutPrice,
     required this.donutColor,
     required this.imageName,
-  }) : super(key: key);
+  });
 
   @override
   _DonutTileState createState() => _DonutTileState();

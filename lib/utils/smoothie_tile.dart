@@ -9,12 +9,12 @@ class SmoothieTile extends StatefulWidget {
   final String imageName;
 
   const SmoothieTile({
-    Key? key,
+    super.key,
     required this.smoothieName,
     required this.smoothiePrice,
     required this.smoothieColor,
     required this.imageName,
-  }) : super(key: key);
+  });
 
   @override
   _SmoothieTileState createState() => _SmoothieTileState();

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'login_page.dart'; // Asegúrate de importar la página de login
 
 class UserProfilePage extends StatelessWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +52,13 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: 24),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Implementación futura de cierre de sesión
+                    onPressed: () async {
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      ); // Redirigir al LoginPage
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -60,7 +66,7 @@ class UserProfilePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 12),
+                          horizontal: 32, vertical: 12),
                     ),
                     child: const Text(
                       'Cerrar Sesión',

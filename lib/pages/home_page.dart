@@ -11,7 +11,7 @@ import '../pages/cart_page.dart';
 import '../pages/user_profile_page.dart'; // Importa la página del perfil de usuario
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -124,11 +124,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             TabBar(tabs: myTabs),
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   DonutTab(),
-                  const BurgerTab(),
+                  BurgerTab(),
                   SmoothieTab(),
                   PancakeTab(),
                   PizzaTab(),

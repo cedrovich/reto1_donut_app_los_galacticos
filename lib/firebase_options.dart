@@ -59,5 +59,4 @@ class DefaultFirebaseOptions {
     projectId: 'moviles8scgalacticos',
     storageBucket: 'moviles8scgalacticos.appspot.com',
   );
-
 }

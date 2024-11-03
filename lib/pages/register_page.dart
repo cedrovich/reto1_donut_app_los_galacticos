@@ -23,7 +23,8 @@ class _RegisterPageState extends State<RegisterPage> {
   // Método para registrar usuario
   Future<void> _register() async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
@@ -38,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
             begin: Alignment.topLeft,
@@ -58,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Regístrate",
                       style: TextStyle(
                         fontSize: 24,
@@ -75,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.email),
                       ),
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -87,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       obscureText: true,
                     ),
@@ -103,7 +104,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         backgroundColor: Colors.deepPurple,
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text("Registrar", style: TextStyle(fontSize: 18)),
+                      child: const Text("Registrar",
+                          style: TextStyle(fontSize: 18)),
                     ),
                     TextButton(
                       onPressed: () {
@@ -112,7 +114,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.purple,
                       ),
-                      child: const Text("¿Ya tienes una cuenta? Inicia sesión."),
+                      child:
+                          const Text("¿Ya tienes una cuenta? Inicia sesión."),
                     ),
                   ],
                 ),

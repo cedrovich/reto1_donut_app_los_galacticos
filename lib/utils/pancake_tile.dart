@@ -9,12 +9,12 @@ class PancakeTile extends StatefulWidget {
   final String imageName;
 
   const PancakeTile({
-    Key? key,
+    super.key,
     required this.pancakeFlavor,
     required this.pancakePrice,
     required this.pancakeColor,
     required this.imageName,
-  }) : super(key: key);
+  });
 
   @override
   _PancakeTileState createState() => _PancakeTileState();

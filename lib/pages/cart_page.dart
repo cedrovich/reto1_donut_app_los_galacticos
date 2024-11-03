@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../utils/cart.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,38 +18,42 @@ class CartPage extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: cart.items.length,
-                  itemBuilder: (ctx, i) => ListTile(
-                    leading: CircleAvatar(
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: FittedBox(
-                          child: Text('\$${cart.items[i].price}'),
+                  itemBuilder: (ctx, i) {
+                    final item = cart.items[i];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: FittedBox(
+                            child: Text('\$${item.price}'),
+                          ),
                         ),
                       ),
-                    ),
-                    title: Text(cart.items[i].name),
-                    subtitle: Text(
-                        'Total: \$${(cart.items[i].price * cart.items[i].quantity).toStringAsFixed(2)}'),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('${cart.items[i].quantity} x'),
-                        IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: () {
-                            cart.removeItem(cart.items[i].name);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    '${cart.items[i].name} remover del carrito'),
-                                duration: const Duration(seconds: 1),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                      title: Text(item.name),
+                      subtitle: Text(
+                          'Total: \$${(item.price * item.quantity).toStringAsFixed(2)}'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('${item.quantity} x'),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () {
+                              final itemName = item.name;
+                              cart.removeItem(itemName);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('$itemName removido del carrito'),
+                                  duration: const Duration(seconds: 1),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
               Card(
@@ -67,7 +71,7 @@ class CartPage extends StatelessWidget {
                       Chip(
                         label: Text(
                           '\$${cart.totalPrice.toStringAsFixed(2)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
@@ -85,7 +89,13 @@ class CartPage extends StatelessWidget {
                         ),
                         child: const Text('ORDENAR AHORA'),
                         onPressed: () {
-                          // Implement order functionality
+                          // Aquí puedes implementar la funcionalidad de la orden
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Funcionalidad de orden pendiente'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
                         },
                       )
                     ],

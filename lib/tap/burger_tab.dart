@@ -8,8 +8,7 @@ class BurgerTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      // Accediendo a la subcolección 'burger1' dentro de la colección 'Burger'
-      stream: FirebaseFirestore.instance.collection('Burger').doc('burger1').collection('burgers').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Burger').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -34,10 +33,23 @@ class BurgerTab extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final burger = burgers[index].data() as Map<String, dynamic>;
+
+            // Verifica si el color es String o int y convierte según sea necesario
+            Color burgerColor;
+            if (burger['color'] is int) {
+              burgerColor = Color(burger['color']);
+            } else if (burger['color'] is String) {
+              burgerColor =
+                  Color(int.parse(burger['color'].replaceFirst('#', '0xFF')));
+            } else {
+              burgerColor =
+                  Colors.grey; // Valor predeterminado en caso de error
+            }
+
             return BurgerTile(
               burgerName: burger['nombre'],
               burgerPrice: burger['precio'],
-              burgerColor: Color(int.parse(burger['color'].replaceFirst('#', '0xFF'))),
+              burgerColor: burgerColor,
               imageName: burger['imagen'],
             );
           },

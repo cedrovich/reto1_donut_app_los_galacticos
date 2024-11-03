@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reto1_donut_app_ulises_millan/utils/donut_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:reto1_donut_app_ulises_millan/utils/donut_tile.dart';
 
 class DonutTab extends StatelessWidget {
   const DonutTab({super.key});
@@ -9,8 +8,7 @@ class DonutTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      // Accediendo a la subcolección 'donut1' dentro de la colección 'Donut'
-      stream: FirebaseFirestore.instance.collection('Donut').doc('donut1').collection('donuts').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Donut').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -35,11 +33,26 @@ class DonutTab extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final donut = donuts[index].data() as Map<String, dynamic>;
+
+            // Verifica si el color es String o int y convierte según sea necesario
+            Color donutColor;
+            if (donut['color'] is int) {
+              donutColor = Color(donut['color']);
+            } else if (donut['color'] is String) {
+              donutColor =
+                  Color(int.parse(donut['color'].replaceFirst('#', '0xFF')));
+            } else {
+              donutColor = Colors.grey; // Valor predeterminado en caso de error
+            }
+
+            // Usa null-aware operators para manejar posibles valores null
             return DonutTile(
-              donutFlavor: donut['nombre'],
-              donutPrice: donut['precio'],
-              donutColor: Color(int.parse(donut['color'].replaceFirst('#', '0xFF'))),
-              imageName: donut['imagen'],
+              donutFlavor:
+                  donut['nombre'] ?? 'Unknown Flavor', // Valor predeterminado
+              donutPrice: donut['precio'] ?? 0.0, // Valor predeterminado
+              donutColor: donutColor,
+              imageName: donut['imagen'] ??
+                  'placeholder_image.png', // Valor predeterminado
             );
           },
         );
@@ -47,39 +60,3 @@ class DonutTab extends StatelessWidget {
     );
   }
 }
-
-// class DonutTab extends StatelessWidget {
-//   // Lista de donuts
-//   final List donutsOnSale = [
-//     ["Ice Cream", "36", Colors.blue, "lib/images/icecream_donut.png"],
-//     ["Strawberry", "45", Colors.red, "lib/images/strawberry_donut.png"],
-//     ["Grape Ape", "84", Colors.purple, "lib/images/grape_donut.png"],
-//     ["Choco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
-//     ["Ice Cream", "36", Colors.blue, "lib/images/icecream_donut.png"],
-//     ["Strawberry", "45", Colors.red, "lib/images/strawberry_donut.png"],
-//     ["Grape Ape", "84", Colors.purple, "lib/images/grape_donut.png"],
-//     ["Choco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
-//   ];
-
-//   DonutTab({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GridView.builder(
-//       itemCount: donutsOnSale.length,
-//       padding: const EdgeInsets.all(12),
-//       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//         crossAxisCount: 2,
-//         childAspectRatio: 1 / 1.5,
-//       ),
-//       itemBuilder: (context, index) {
-//         return DonutTile(
-//           donutFlavor: donutsOnSale[index][0],
-//           donutPrice: donutsOnSale[index][1],
-//           donutColor: donutsOnSale[index][2],
-//           imageName: donutsOnSale[index][3],
-//         );
-//       },
-//     );
-//   }
-// }

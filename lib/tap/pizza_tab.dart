@@ -8,8 +8,7 @@ class PizzaTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      // Accediendo a la subcolección 'pizza1' dentro de la colección 'Pizza'
-      stream: FirebaseFirestore.instance.collection('Pizza').doc('pizza1').collection('pizzas').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Pizza').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -34,10 +33,21 @@ class PizzaTab extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final pizza = pizzas[index].data() as Map<String, dynamic>;
+
+            Color pizzaColor;
+            if (pizza['color'] is int) {
+              pizzaColor = Color(pizza['color']);
+            } else if (pizza['color'] is String) {
+              pizzaColor =
+                  Color(int.parse(pizza['color'].replaceFirst('#', '0xFF')));
+            } else {
+              pizzaColor = Colors.grey;
+            }
+
             return PizzaTile(
               pizzaFlavor: pizza['nombre'],
               pizzaPrice: pizza['precio'],
-              pizzaColor: Color(int.parse(pizza['color'].replaceFirst('#', '0xFF'))),
+              pizzaColor: pizzaColor,
               imageName: pizza['imagen'],
             );
           },
@@ -46,40 +56,3 @@ class PizzaTab extends StatelessWidget {
     );
   }
 }
-
-
-// class PizzaTab extends StatelessWidget {
-//   // Lista de pizzas
-//   final List pizzasOnSale = [
-//     ["Pepperoni Pizza", "40", Colors.orange, "lib/images/pizza.png"],
-//     ["Margarita Pizza", "35", Colors.green, "lib/images/pizza.png"],
-//     ["BBQ Chicken Pizza", "50", Colors.brown, "lib/images/pizza.png"],
-//     ["Hawaiian Pizza", "45", Colors.yellow, "lib/images/pizza.png"],
-//     ["Veggie Pizza", "38", Colors.red, "lib/images/pizza.png"],
-//     ["Buffalo Pizza", "42", Colors.blue, "lib/images/pizza.png"],
-//     ["Meat Lovers Pizza", "55", Colors.purple, "lib/images/pizza.png"],
-//     ["Four Cheese Pizza", "48", Colors.grey, "lib/images/pizza.png"],
-//   ];
-
-//   PizzaTab({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GridView.builder(
-//       itemCount: pizzasOnSale.length,
-//       padding: const EdgeInsets.all(12),
-//       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//         crossAxisCount: 2,
-//         childAspectRatio: 1 / 1.5,
-//       ),
-//       itemBuilder: (context, index) {
-//         return PizzaTile(
-//           pizzaFlavor: pizzasOnSale[index][0],
-//           pizzaPrice: pizzasOnSale[index][1],
-//           pizzaColor: pizzasOnSale[index][2],
-//           imageName: pizzasOnSale[index][3],
-//         );
-//       },
-//     );
-//   }
-// }

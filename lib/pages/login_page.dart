@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home_page.dart';
-import 'register_page.dart'; // Asegúrate de importar la página de registro
+import 'register_page.dart';
+import 'forgot_password_page.dart'; // Importa ForgotPasswordPage
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.blueAccent, Colors.lightBlueAccent],
             begin: Alignment.topLeft,
@@ -61,12 +62,12 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Bienvenido",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 255, 2, 255),
+                        color: Color.fromARGB(255, 255, 2, 255),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.email),
                       ),
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       obscureText: true,
                     ),
@@ -103,10 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 40),
-                        backgroundColor: const Color.fromARGB(255, 243, 33, 187),
+                        backgroundColor:
+                            const Color.fromARGB(255, 243, 33, 187),
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text("Iniciar Sesión", style: TextStyle(fontSize: 18)),
+                      child: const Text("Iniciar Sesión",
+                          style: TextStyle(fontSize: 18)),
                     ),
                     TextButton(
                       onPressed: () {
@@ -119,7 +122,21 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextButton.styleFrom(
                         foregroundColor: const Color.fromARGB(255, 38, 0, 255),
                       ),
-                      child: const Text("¿No tienes una cuenta? Regístrate aquí."),
+                      child:
+                          const Text("¿No tienes una cuenta? Regístrate aquí."),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ForgotPasswordPage()),
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.redAccent,
+                      ),
+                      child: const Text("¿Olvidaste tu contraseña?"),
                     ),
                   ],
                 ),
@@ -131,4 +148,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-

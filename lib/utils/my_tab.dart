@@ -13,7 +13,8 @@ class MyTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido verticalmente
+      mainAxisAlignment:
+          MainAxisAlignment.center, // Centra el contenido verticalmente
       children: [
         // Contenedor del icono
         Container(

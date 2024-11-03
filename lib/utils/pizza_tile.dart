@@ -9,12 +9,12 @@ class PizzaTile extends StatefulWidget {
   final String imageName;
 
   const PizzaTile({
-    Key? key,
+    super.key,
     required this.pizzaFlavor,
     required this.pizzaPrice,
     required this.pizzaColor,
     required this.imageName,
-  }) : super(key: key);
+  });
 
   @override
   _PizzaTileState createState() => _PizzaTileState();
