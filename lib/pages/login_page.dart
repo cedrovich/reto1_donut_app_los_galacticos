@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blueAccent, Colors.lightBlueAccent],
+            colors: [Color.fromRGBO(70, 138, 255, 1), Color.fromRGBO(70, 138, 255, 1)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 255, 2, 255),
+                        color: Color.fromRGBO(68, 138, 255, 1.0),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 40),
                         backgroundColor:
-                            const Color.fromARGB(255, 243, 33, 187),
+                            const Color.fromRGBO(68, 138, 255, 1.0),
                         foregroundColor: Colors.white,
                       ),
                       child: const Text("Iniciar Sesión",

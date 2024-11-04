@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'login_page.dart'; // Importa LoginPage
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -22,6 +23,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     try {
       await _auth.sendPasswordResetEmail(email: _emailController.text.trim());
       _showMessage("Correo de recuperación enviado. Revisa tu bandeja.");
+
+      // Redirige a la página de inicio de sesión después de enviar el correo
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
     } catch (e) {
       _showMessage("Error al enviar el correo de recuperación.");
     }

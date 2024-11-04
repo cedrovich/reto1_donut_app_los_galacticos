@@ -8,7 +8,7 @@ import '../tap/pizza_tab.dart';
 import '../tap/smoothie_tab.dart';
 import '../utils/cart.dart';
 import '../pages/cart_page.dart';
-import '../pages/user_profile_page.dart'; // Importa la página del perfil de usuario
+import '../pages/user_profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  List<Widget> myTabs = [
+  final List<Widget> myTabs = [
     const MyTab(iconPath: 'lib/icons/donut.png', label: 'Donuts'),
     const MyTab(iconPath: 'lib/icons/burger.png', label: 'Burgers'),
     const MyTab(iconPath: 'lib/icons/smoothie.png', label: 'Smoothies'),
@@ -41,17 +41,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   void _onTabSelected(int index) {
-    _tabController.animateTo(index); // Cambia a la pestaña seleccionada
-    Navigator.of(context).pop(); // Cierra el Drawer
+    _tabController.animateTo(index);
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Asegúrate de que _tabController está inicializado antes de construir el widget
-    if (_tabController == null) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,7 +56,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             return IconButton(
               icon: Icon(Icons.menu, color: Colors.grey[800], size: 36),
               onPressed: () {
-                Scaffold.of(context).openDrawer(); // Abre el Drawer
+                Scaffold.of(context).openDrawer();
               },
             );
           },
@@ -72,11 +67,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             child: IconButton(
               icon: Icon(Icons.person, color: Colors.grey[800], size: 36),
               onPressed: () {
-                // Navega a la página de perfil del usuario
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const UserProfilePage()),
+                  MaterialPageRoute(builder: (context) => const UserProfilePage()),
                 );
               },
             ),
@@ -167,8 +160,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(20)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -205,8 +197,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const CartPage()),
+                          MaterialPageRoute(builder: (context) => const CartPage()),
                         );
                       },
                       style: ElevatedButton.styleFrom(

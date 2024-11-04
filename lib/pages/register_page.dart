@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.purpleAccent, Colors.deepPurpleAccent],
+            colors: [Colors.deepPurpleAccent, Colors.deepPurpleAccent],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.deepPurple,
+                        color: Color.fromRGBO(103, 58, 183, 1),
                       ),
                       textAlign: TextAlign.center,
                     ),

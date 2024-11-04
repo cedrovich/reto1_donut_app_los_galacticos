@@ -1,24 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'login_page.dart'; // Asegúrate de importar la página de login
+import 'login_page.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({super.key});
 
+  Future<void> _resetPassword(BuildContext context) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null && user.email != null) {
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: user.email!);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Correo de restablecimiento enviado')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error al enviar el correo: $e')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No se pudo enviar el correo')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Obtenemos al usuario actual desde Firebase Auth
     User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
-      backgroundColor: Colors.grey[200], // Fondo suave
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: const Text('Perfil del Usuario'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Volver a la HomePage
+            Navigator.pop(context);
           },
         ),
       ),
@@ -52,13 +71,30 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: 24),
                 Center(
                   child: ElevatedButton(
+                    onPressed: () => _resetPassword(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
+                    ),
+                    child: const Text(
+                      'Cambiar Contraseña',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: ElevatedButton(
                     onPressed: () async {
                       await FirebaseAuth.instance.signOut();
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
-                      ); // Redirigir al LoginPage
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
