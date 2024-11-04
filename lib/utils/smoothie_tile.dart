@@ -71,8 +71,7 @@ class _SmoothieTileState extends State<SmoothieTile> {
                   ),
                   child: Image.asset(
                     widget.imageName,
-                    width: 150,
-                    height: 150,
+                    width: 300,
                     fit: BoxFit.cover,
                   ),
                 ),
