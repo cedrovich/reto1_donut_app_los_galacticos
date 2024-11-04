@@ -71,7 +71,7 @@ class _PizzaTileState extends State<PizzaTile> {
                   ),
                   child: Image.asset(
                     widget.imageName,
-                    height: 180,
+                    height: 150,
                     fit: BoxFit.cover,
                   ),
                 ),
